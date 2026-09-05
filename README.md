@@ -1,16 +1,38 @@
-# React + Vite
+# Sumit Kumar Godwan — Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio site for a backend engineer working on high-throughput,
+low-latency fintech systems. Built with React 19, Vite and Tailwind CSS,
+with page transitions by Framer Motion.
 
-Currently, two official plugins are available:
+## Getting started
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev      # local dev server with HMR
+```
 
-## React Compiler
+## Scripts
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+| Command           | What it does                          |
+| ----------------- | ------------------------------------- |
+| `npm run dev`     | Start the Vite dev server             |
+| `npm run build`   | Production build into `dist/`         |
+| `npm run preview` | Serve the production build locally    |
+| `npm run lint`    | Run ESLint across the project         |
 
-## Expanding the ESLint configuration
+## Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+```
+src/
+  components/   Hero, About, Experience, Projects, Skills, Certificates, Contact
+  assets/       Images used by the sections
+  App.jsx       Section composition
+  index.css     Tailwind entry + global styles
+```
+
+## Notes
+
+- The contact form opens the visitor's mail client via a `mailto:` link — no
+  backend required. (EmailJS keys live in `.env`, which is not committed, for
+  if the form is switched to a hosted sender later.)
+- Deployed to GitHub Pages from `main` by `.github/workflows/deploy.yml`.
