@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { FiGithub, FiLinkedin, FiMail, FiArrowDown } from 'react-icons/fi'
-import niyoBg from '../assets/niyo-app.jpeg'
+import heroBg from '../assets/hero.png'
 
 const socialLinks = [
   { icon: <FiGithub size={18} />, href: 'https://github.com', label: 'GitHub' },
@@ -20,44 +20,32 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* ── Background image with layered overlays ── */}
+      {/* ── Background with layered overlays ── */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* The Niyo app image — right side, faded */}
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url(${niyoBg})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center top',
-            backgroundRepeat: 'no-repeat',
-            opacity: 0.07,
-          }}
-        />
-
         {/* Dark base overlay */}
         <div className="absolute inset-0"
           style={{ background: 'linear-gradient(135deg, #080810 0%, #0d0820 50%, #080810 100%)' }}
         />
 
-        {/* Niyo image — positioned right, more visible, masked */}
+        {/* Hero graphic — floating, right side */}
         <motion.div
-          initial={{ opacity: 0, x: 60 }}
-          animate={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, x: 60, y: -10 }}
+          animate={{ opacity: 1, x: 0, y: 0 }}
           transition={{ duration: 1.2, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="absolute right-0 top-0 bottom-0 w-1/2 hidden lg:block"
+          className="absolute right-[6%] top-1/2 -translate-y-1/2 w-[340px] md:w-[460px] aspect-square hidden md:block"
           style={{
-            backgroundImage: `url(${niyoBg})`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center top',
+            backgroundImage: `url(${heroBg})`,
+            backgroundSize: 'contain',
+            backgroundPosition: 'center',
             backgroundRepeat: 'no-repeat',
-            maskImage: 'linear-gradient(to left, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to left, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.15) 40%, transparent 100%)',
+            opacity: 0.9,
+            filter: 'drop-shadow(0 30px 60px rgba(139,92,246,0.35))',
           }}
         />
 
         {/* Left-to-right fade so text stays readable */}
         <div className="absolute inset-0"
-          style={{ background: 'linear-gradient(to right, #080810 30%, #080810cc 55%, transparent 100%)' }}
+          style={{ background: 'linear-gradient(to right, #080810 30%, #080810cc 55%, transparent 85%)' }}
         />
 
         {/* Bottom fade */}

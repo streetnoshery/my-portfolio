@@ -34,6 +34,13 @@
 ::-webkit-scrollbar-track { background: #080810; }
 ::-webkit-scrollbar-thumb { background: #8b5cf6; border-radius: 4px; }
 
+/* Keyboard focus */
+:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
 /* Gradient text */
 .gradient-text {
   background: linear-gradient(135deg, #c4b5fd 0%, #8b5cf6 100%);

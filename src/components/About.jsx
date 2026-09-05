@@ -46,7 +46,7 @@ export default function About() {
           >
             <p className="text-slate-300 text-lg leading-relaxed">
               I'm a Backend Engineer with{' '}
-              <span className="text-white font-semibold">4 years</span> of experience
+              <span className="text-white font-semibold">4+ years</span> of experience
               building high-throughput, low-latency fintech infrastructure at Niyo Solutions.
             </p>
             <p className="text-slate-400 leading-relaxed">

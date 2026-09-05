@@ -37,6 +37,20 @@ const projects = [
     liveUrl: 'https://flappy.co.in',
     githubUrl: 'https://github.com',
   },
+  {
+    title: 'Image Validator',
+    subtitle: 'Local Image Upload & Validation Service',
+    description:
+      'Full-stack image upload and validation service that runs entirely locally — no cloud services or AWS credentials required. Validates format, size, blur, duplicates, and faces before accepting an upload.',
+    highlights: [
+      'Magic byte detection for HEIC, PNG, and JPEG with automatic HEIC → JPEG conversion',
+      'Blur detection via Laplacian variance and duplicate detection via 64-bit DCT perceptual hashing',
+      'Face detection (face-api.js + SSD MobileNet v1) rejects zero, multiple, or too-small faces',
+      'Fully containerized with Docker Compose — PostgreSQL + MinIO (S3-compatible) storage',
+    ],
+    stack: ['React', 'Vite', 'Express', 'Node.js', 'PostgreSQL', 'MinIO', 'sharp', 'Docker'],
+    githubUrl: 'https://github.com/streetnoshery/image-validator',
+  },
 ]
 
 export default function Projects() {
@@ -159,7 +173,7 @@ export default function Projects() {
         {/* ── Side Projects ── */}
         <div className="mt-4">
           <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest mb-5">Side Projects</p>
-          <div className="grid md:grid-cols-1 max-w-2xl gap-5">
+          <div className="grid md:grid-cols-2 max-w-4xl gap-5">
             {projects.map((project, i) => (
               <motion.div
                 key={project.title}
@@ -176,14 +190,18 @@ export default function Projects() {
                       <p className="text-violet-400 text-sm font-medium mt-0.5">{project.subtitle}</p>
                     </div>
                     <div className="flex items-center gap-2 shrink-0">
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub"
-                        className="w-8 h-8 rounded-lg border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-violet-500/40 transition-all">
-                        <FiGithub size={15} />
-                      </a>
-                      <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label="Live site"
-                        className="w-8 h-8 rounded-lg border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-violet-500/40 transition-all">
-                        <FiExternalLink size={15} />
-                      </a>
+                      {project.githubUrl && (
+                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" aria-label="GitHub"
+                          className="w-8 h-8 rounded-lg border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-violet-500/40 transition-all">
+                          <FiGithub size={15} />
+                        </a>
+                      )}
+                      {project.liveUrl && (
+                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" aria-label="Live site"
+                          className="w-8 h-8 rounded-lg border border-white/10 bg-white/5 flex items-center justify-center text-slate-400 hover:text-white hover:border-violet-500/40 transition-all">
+                          <FiExternalLink size={15} />
+                        </a>
+                      )}
                     </div>
                   </div>
                   <p className="text-slate-400 text-sm leading-relaxed mb-5">{project.description}</p>
