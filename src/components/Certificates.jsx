@@ -11,7 +11,7 @@ const certificates = [
     hours: '8.5 hours',
     url: 'https://ude.my/UC-58386347-f8d8-4cd7-b40f-44f5a12f71e5',
     credentialId: 'UC-58386347-f8d8-4cd7-b40f-44f5a12f71e5',
-    color: '#a78bfa',
+    color: '#7c3aed',
     tag: 'Messaging',
   },
   {
@@ -22,7 +22,7 @@ const certificates = [
     hours: '3.5 hours',
     url: 'https://ude.my/UC-3a0b65f7-4dc4-4cce-a3f9-824fc3de3919',
     credentialId: 'UC-3a0b65f7-4dc4-4cce-a3f9-824fc3de3919',
-    color: '#34d399',
+    color: '#059669',
     tag: 'AI / ML',
   },
   {
@@ -33,7 +33,7 @@ const certificates = [
     hours: '16 hours',
     url: 'https://ude.my/UC-384e5874-cd39-45c4-87e6-b767fe415969',
     credentialId: 'UC-384e5874-cd39-45c4-87e6-b767fe415969',
-    color: '#38bdf8',
+    color: '#0284c7',
     tag: 'Node.js',
   },
 ]
@@ -43,7 +43,7 @@ export default function Certificates() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="certificates" className="py-28 px-6 relative" ref={ref}>
+    <section id="certificates" className="py-10 md:py-14 px-6 relative" ref={ref}>
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-b from-transparent to-violet-500/30" />
 
       <div className="max-w-5xl mx-auto">
@@ -51,11 +51,11 @@ export default function Certificates() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-14"
+          className="mb-10"
         >
           <div className="section-label">Certificates</div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Certifications</h2>
-          <p className="text-slate-400 mt-3 max-w-lg text-sm">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Certifications</h2>
+          <p className="text-slate-600 mt-3 max-w-lg text-sm">
             Courses completed to deepen expertise beyond day-to-day work.
           </p>
         </motion.div>
@@ -67,7 +67,8 @@ export default function Certificates() {
               initial={{ opacity: 0, y: 24 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: i * 0.12 }}
-              className="group relative flex flex-col p-6 rounded-2xl border border-white/8 bg-white/3 hover:border-violet-500/25 hover:bg-violet-500/5 transition-all duration-300 overflow-hidden"
+              whileHover={{ y: -5, scale: 1.015 }}
+              className="group relative flex flex-col p-6 rounded-2xl border border-slate-900/8 bg-white hover:border-violet-500/25 hover:bg-violet-500/5 transition-colors duration-300 overflow-hidden shadow-sm shadow-slate-900/5"
             >
               {/* Top color accent */}
               <div
@@ -78,7 +79,7 @@ export default function Certificates() {
               {/* Header row */}
               <div className="flex items-start justify-between gap-3 mb-4">
                 <div
-                  className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border"
+                  className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 border transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
                   style={{
                     backgroundColor: `${cert.color}18`,
                     borderColor: `${cert.color}35`,
@@ -106,7 +107,7 @@ export default function Certificates() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="View certificate"
-                    className="w-8 h-8 rounded-lg border border-white/8 bg-white/5 flex items-center justify-center text-slate-500 hover:text-white hover:border-violet-500/40 transition-all"
+                    className="w-8 h-8 rounded-lg border border-slate-900/8 bg-slate-900/5 flex items-center justify-center text-slate-500 hover:text-slate-900 hover:border-violet-500/40 transition-all"
                   >
                     <FiExternalLink size={14} />
                   </a>
@@ -114,18 +115,18 @@ export default function Certificates() {
               </div>
 
               {/* Title */}
-              <h3 className="text-white font-semibold text-base leading-snug mb-1">
+              <h3 className="text-slate-900 font-semibold text-base leading-snug mb-1">
                 {cert.title}
               </h3>
 
               {/* Issuer + instructor */}
               <p className="text-slate-500 text-sm mb-4">
-                <span className="text-slate-400 font-medium">{cert.issuer}</span>
+                <span className="text-slate-700 font-medium">{cert.issuer}</span>
                 {' · '}{cert.instructor}
               </p>
 
               {/* Meta row */}
-              <div className="flex items-center gap-4 mt-auto pt-4 border-t border-white/5">
+              <div className="flex items-center gap-4 mt-auto pt-4 border-t border-slate-900/5">
                 <div className="flex items-center gap-1.5 text-slate-500 text-xs">
                   <FiCalendar size={12} />
                   {cert.date}

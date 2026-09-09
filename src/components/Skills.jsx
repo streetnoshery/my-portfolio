@@ -58,7 +58,7 @@ export default function Skills() {
   const isInView = useInView(ref, { once: true, margin: '-80px' })
 
   return (
-    <section id="skills" className="py-28 px-6 relative" ref={ref}>
+    <section id="skills" className="py-10 md:py-14 px-6 relative" ref={ref}>
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-b from-transparent to-violet-500/30" />
 
       <div className="max-w-5xl mx-auto">
@@ -66,10 +66,10 @@ export default function Skills() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-14"
+          className="mb-10"
         >
           <div className="section-label">Skills</div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Technical Stack</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Technical Stack</h2>
         </motion.div>
 
         <div className="space-y-10">
@@ -92,13 +92,16 @@ export default function Skills() {
                       initial={{ opacity: 0, scale: 0.92 }}
                       animate={isInView ? { opacity: 1, scale: 1 } : {}}
                       transition={{ duration: 0.3, delay }}
-                      whileHover={{ y: -2 }}
-                      className="flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-white/8 bg-white/4 hover:border-violet-500/30 hover:bg-violet-500/5 transition-all duration-200 cursor-default"
+                      whileHover={{ y: -3, scale: 1.04 }}
+                      className="skill-chip group flex items-center gap-2.5 px-4 py-2.5 rounded-xl border border-slate-900/8 bg-white hover:border-violet-500/30 hover:bg-violet-500/5 transition-colors duration-200 cursor-default shadow-sm shadow-slate-900/5"
                     >
-                      <span className="text-lg leading-none" style={{ color: item.color }}>
+                      <span
+                        className="text-lg leading-none transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
+                        style={{ color: item.color }}
+                      >
                         {item.icon}
                       </span>
-                      <span className="text-slate-300 text-sm font-medium">{item.name}</span>
+                      <span className="text-slate-700 text-sm font-medium">{item.name}</span>
                     </motion.div>
                   )
                 })}

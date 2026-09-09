@@ -1,4 +1,4 @@
-import { motion, useInView } from 'framer-motion'
+import { motion, useInView, useScroll } from 'framer-motion'
 import { useRef } from 'react'
 
 const experiences = [
@@ -50,9 +50,14 @@ const experiences = [
 export default function Experience() {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: '-80px' })
+  const timelineRef = useRef(null)
+  const { scrollYProgress: timelineProgress } = useScroll({
+    target: timelineRef,
+    offset: ['start 0.85', 'end 0.6'],
+  })
 
   return (
-    <section id="experience" className="py-28 px-6 relative" ref={ref}>
+    <section id="experience" className="py-10 md:py-14 px-6 relative" ref={ref}>
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-b from-transparent to-violet-500/30" />
 
       <div className="max-w-5xl mx-auto">
@@ -60,15 +65,19 @@ export default function Experience() {
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.5 }}
-          className="mb-14"
+          className="mb-10"
         >
           <div className="section-label">Experience</div>
-          <h2 className="text-3xl md:text-4xl font-bold text-white">Work History</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">Work History</h2>
         </motion.div>
 
-        <div className="relative">
-          {/* Timeline spine */}
-          <div className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-violet-500/60 via-violet-500/20 to-transparent hidden sm:block" />
+        <div className="relative" ref={timelineRef}>
+          {/* Timeline spine — faint track + scroll-filled progress */}
+          <div className="absolute left-[19px] top-2 bottom-2 w-px bg-slate-900/8 hidden sm:block" />
+          <motion.div
+            className="absolute left-[19px] top-2 bottom-2 w-px bg-gradient-to-b from-violet-400 via-violet-500 to-violet-500/40 hidden sm:block origin-top"
+            style={{ scaleY: timelineProgress }}
+          />
 
           <div className="space-y-6">
             {experiences.map((exp, i) => (
@@ -80,35 +89,47 @@ export default function Experience() {
                 className="relative sm:pl-14"
               >
                 {/* Dot */}
-                <div className="absolute left-0 top-5 hidden sm:flex items-center justify-center w-10 h-10 rounded-full border border-white/10 bg-[#080810]">
-                  <div className={`w-3 h-3 rounded-full ${exp.current ? 'bg-violet-400 shadow-[0_0_8px_#8b5cf6]' : 'bg-slate-700'}`} />
+                <div className="absolute left-0 top-5 hidden sm:flex items-center justify-center w-10 h-10 rounded-full border border-slate-900/10 bg-[#f8f7fb]">
+                  <div className="relative flex items-center justify-center w-3 h-3">
+                    {exp.current && (
+                      <motion.span
+                        className="absolute inset-0 rounded-full bg-violet-400"
+                        animate={{ scale: [1, 2.2, 1], opacity: [0.6, 0, 0.6] }}
+                        transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+                      />
+                    )}
+                    <div className={`relative w-3 h-3 rounded-full ${exp.current ? 'bg-violet-500 shadow-[0_0_8px_#8b5cf6]' : 'bg-slate-300'}`} />
+                  </div>
                 </div>
 
                 {/* Card */}
-                <div className="group p-6 rounded-2xl border border-white/8 bg-white/3 hover:border-violet-500/25 hover:bg-violet-500/5 transition-all duration-300">
-
+                <motion.div
+                  whileHover={{ y: -4 }}
+                  transition={{ duration: 0.25 }}
+                  className="group p-6 rounded-2xl border border-slate-900/8 bg-white hover:border-violet-500/25 hover:bg-violet-500/5 transition-colors duration-300 shadow-sm shadow-slate-900/5"
+                >
                   {/* Top row */}
                   <div className="flex flex-wrap items-start justify-between gap-3 mb-4">
                     <div>
                       <div className="flex items-center gap-2 flex-wrap">
-                        <h3 className="text-white font-bold text-base leading-tight">{exp.role}</h3>
+                        <h3 className="text-slate-900 font-bold text-base leading-tight">{exp.role}</h3>
                         {exp.current && (
-                          <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
+                          <span className="px-2 py-0.5 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-700 text-xs font-semibold">
                             Current
                           </span>
                         )}
                       </div>
                       <div className="flex items-center gap-2 mt-1">
-                        <span className="text-violet-400 font-semibold text-sm">{exp.company}</span>
+                        <span className="text-violet-600 font-semibold text-sm">{exp.company}</span>
                         {exp.product && (
                           <>
-                            <span className="text-slate-700">·</span>
+                            <span className="text-slate-300">·</span>
                             <span className="text-slate-500 text-xs">{exp.product}</span>
                           </>
                         )}
                       </div>
                     </div>
-                    <span className="text-slate-500 text-xs font-medium bg-white/5 border border-white/8 px-3 py-1 rounded-lg shrink-0">
+                    <span className="text-slate-500 text-xs font-medium bg-slate-900/5 border border-slate-900/8 px-3 py-1 rounded-lg shrink-0">
                       {exp.period}
                     </span>
                   </div>
@@ -116,7 +137,7 @@ export default function Experience() {
                   {/* Bullets */}
                   <ul className="space-y-2 mb-5">
                     {exp.bullets.map((b, bi) => (
-                      <li key={bi} className="flex items-start gap-3 text-slate-400 text-sm leading-relaxed">
+                      <li key={bi} className="flex items-start gap-3 text-slate-600 text-sm leading-relaxed">
                         <span className="mt-2 w-1 h-1 rounded-full bg-violet-500 shrink-0" />
                         {b}
                       </li>
@@ -127,13 +148,13 @@ export default function Experience() {
                   <div className="flex flex-wrap gap-2">
                     {exp.stack.map((tech) => (
                       <span key={tech}
-                        className="px-2.5 py-1 rounded-lg bg-violet-500/10 border border-violet-500/20 text-violet-300 text-xs font-medium"
+                        className="px-2.5 py-1 rounded-lg bg-violet-500/10 border border-violet-500/20 text-violet-700 text-xs font-medium"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               </motion.div>
             ))}
           </div>
